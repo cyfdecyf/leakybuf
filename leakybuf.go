@@ -26,12 +26,12 @@ func (lb *LeakyBuf) Get() (b []byte) {
 	return
 }
 
-// Put add the buffer into the free buffer pool for reuse. If the buffer size
-// is not the same with the leaky buffer's, Put will simply return and do not
-// add the buffer.
+// Put add the buffer into the free buffer pool for reuse. Panic if the buffer
+// size is not the same with the leaky buffer's. This is intended to expose
+// error usage of leaky buffer.
 func (lb *LeakyBuf) Put(b []byte) {
 	if len(b) != lb.bufSize {
-		return
+		panic("invalid buffer size that's put into leaky buffer")
 	}
 	select {
 	case lb.freeList <- b:
