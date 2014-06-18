@@ -1,4 +1,4 @@
-// Package leakbuf provides leaky buffer.
+// Package leakybuf provides leaky buffer.
 // It's based on the example in Effective Go.
 package leakybuf
 
